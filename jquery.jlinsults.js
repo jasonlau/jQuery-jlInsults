@@ -2,7 +2,7 @@
 /* 
     jlInsults - A jQuery plugin
     ==================================================================
-    ©2011 JasonLau.biz - Version 1.0.0
+    ©2011 JasonLau.biz - Version 1.0.1
     ==================================================================
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -58,38 +58,37 @@
                     c = C[Math.floor(Math.random()*C.length)],
                     d = D[Math.floor(Math.random()*D.length)],
                     e = E[Math.floor(Math.random()*E.length)],
-                    f = F[Math.floor(Math.random()*F.length)];
-              if(option.names[0] != ''){
-                var name = option.names[Math.floor(Math.random()*option.names.length)];
-                $('#jlinsults-insult-name').val(name);
-              }      
+                    f = F[Math.floor(Math.random()*F.length)];                   
               if($('#jlinsults-insult-name').val() != ''){
                 var insult_string = $('#jlinsults-insult-name').val() + ' is ' + a + ' ' + b + ' ' + c + ' and a ' + d + ' ' + e + ' ' + f + '.';
               } else {
+                try{
+                if(option.names[0]){
+                var name = option.names[Math.floor(Math.random()*option.names.length)];
+                var insult_string = name + ' is ' + a + ' ' + b + ' ' + c + ' and a ' + d + ' ' + e + ' ' + f + '.';
+              } else {
                 var insult_string = 'You are ' + a + ' ' + b + ' ' + c + ' and a ' + d + ' ' + e + ' ' + f + '.';
+              }
+              } catch(e){};                
               }
               $('#jlinsults-insult').fadeOut('slow',function(){
                 $('#jlinsults-insult').html(insult_string);
               });
               $('#jlinsults-insult').fadeIn('slow',function(){});
               return insult_string;
-              }
-              
+              }              
               obj.append('<div id="jlinsults-container"><div id="jlinsults-form" style="display:none"><label>Name:</label> <input type="text" size="22" id="jlinsults-insult-name" class="insult-name" /> <input type="button" value="Insult" id="jlinsults-insult-do" class="insult-do" /></div><div id="jlinsults-insult" class="insult"></div></div>');
-              if(option.show_form){
-                $('#jlinsults-form').show('slow');
-              }
-              
               $('#jlinsults-insult-do').bind('click', function(){
                 generateInsult();
               });
-              
+              if(option.show_form){
+                $('#jlinsults-form').fadeIn('slow');
+              }
               if(option.animate){
                 if(!myInterval){
                     var myInterval = self.setInterval('jlInsults_Run()',option.speed*1000);
                 }
-              }
-              
+              }             
               generateInsult();
              });
     	}
