@@ -2,7 +2,7 @@
 /* 
     jlInsults - A jQuery plugin
     ==================================================================
-    ©2011 JasonLau.biz - Version 1.0.2
+    ©2011 JasonLau.biz - Version 1.0.3
     ==================================================================
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -59,8 +59,9 @@
             if(option.timer_container && option.show_timer){
                 $(''+option.timer_container+'').append(thetimer);
             } else {
-                if(option.show_timer){
-                    obj.append(thetimer);
+                obj.append(thetimer);
+                if(!option.show_timer){
+                    $('#control-insults-on').hide()
                 }
             }
             if(option.animate){
